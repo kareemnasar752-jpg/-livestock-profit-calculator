@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة أرباح التسمين</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; }
+        .container { max-width: 500px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #2c3e50; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { background: #27ae60; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-size: 18px; cursor: pointer; }
+        button:hover { background: #219653; }
+        .result { margin-top: 20px; padding: 15px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 5px; font-size: 18px; text-align: center; color: #0e6251; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>حاسبة أرباح التسمين</h2>
+    <div class="form-group">
+        <label>سعر شراء الحيوان (جنيه):</label>
+        <input type="number" id="purchasePrice" placeholder="مثال: 5000">
+    </div>
+    <div class="form-group">
+        <label>تكلفة العلف والخدمات الإجمالية (جنيه):</label>
+        <input type="number" id="feedCost" placeholder="مثال: 3000">
+    </div>
+    <div class="form-group">
+        <label>سعر البيع المتوقع (جنيه):</label>
+        <input type="number" id="sellPrice" placeholder="مثال: 10000">
+    </div>
+    <button onclick="calculateProfit()">احسب صافي الربح</button>
+    
+    <div class="result" id="resultDiv" style="display:none;"></div>
+</div>
+
+<script>
+function calculateProfit() {
+    let purchase = parseFloat(document.getElementById('purchasePrice').value) || 0;
+    let feed = parseFloat(document.getElementById('feedCost').value) || 0;
+    let sell = parseFloat(document.getElementById('sellPrice').value) || 0;
+    
+    let totalCost = purchase + feed;
+    let profit = sell - totalCost;
+    
+    let resultDiv = document.getElementById('resultDiv');
+    resultDiv.style.display = 'block';
+    
+    if (profit > 0) {
+        resultDiv.innerHTML = `مشاء الله! صافي الربح المتوقع: <strong>${profit} جنيه</strong> 💰`;
+        resultDiv.style.background = '#e8f8f5';
+        resultDiv.style.color = '#0e6251';
+    } else {
+        resultDiv.innerHTML = `تنبيه: توجد خسارة مقدرة بقيمة: <strong>${Math.abs(profit)} جنيه</strong> ⚠️`;
+        resultDiv.style.background = '#fdebd0';
+        resultDiv.style.color = '#78281f';
+    }
+}
+</script>
+
+</body>
+</html>
